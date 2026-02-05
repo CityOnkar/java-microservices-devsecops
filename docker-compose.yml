@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mysql-user:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: userdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+
+  user-service:
+    build: services/user-service
+    ports:
+      - "8081:8081"
