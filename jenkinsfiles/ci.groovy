@@ -68,7 +68,7 @@ pipeline {
                   trivy image \
                   --exit-code 1 \
                   --severity HIGH,CRITICAL \
-                  ${DOCKER_REGISTRY}/${service}:${BUILD_NUMBER_TAG}
+                  ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
                 """
               }
 
