@@ -10,6 +10,7 @@ pipeline {
     TRIVY_CACHE_DIR = '/var/lib/trivy'
     DOCKER_REGISTRY = 'cityonkar'
     BUILD_NUMBER_TAG = "${env.BUILD_NUMBER}"
+    COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
   }
 
   stages {
@@ -57,7 +58,8 @@ pipeline {
 
               stage("Docker Build - ${service}") {
                 sh """
-                  docker build -t ${DOCKER_REGISTRY}/${service}:${BUILD_NUMBER_TAG} .
+                  docker build -t ${DOCKER_REGISTRY}/${service}:git-${COMMIT} .
+                  docker tag ${DOCKER_REGISTRY}/${service}:git-${COMMIT} ${DOCKER_REGISTRY}/${service}:build-${BUILD_NUMBER_TAG}
                 """
               }
 
@@ -72,7 +74,8 @@ pipeline {
 
               stage("Docker Push - ${service}") {
                 sh """
-                  docker push ${DOCKER_REGISTRY}/${service}:${BUILD_NUMBER_TAG}
+                  docker push ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
+                  docker push ${DOCKER_REGISTRY}/${service}:build-${BUILD_NUMBER_TAG}
                 """
               }
             }
