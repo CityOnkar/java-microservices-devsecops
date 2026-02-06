@@ -1,0 +1,39 @@
+---
+- name: Install Java (required for Jenkins)
+  apt:
+    name: openjdk-17-jdk
+    state: present
+    update_cache: no
+
+- name: Install required utilities
+  apt:
+    name:
+      - curl
+      - ca-certificates
+    state: present
+    update_cache: no
+
+- name: Download Jenkins deb package
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/binary/jenkins_2.452.3_all.deb
+    dest: /tmp/jenkins.deb
+    mode: '0644'
+
+- name: Check if Jenkins is already installed
+  command: dpkg -l jenkins
+  register: jenkins_installed
+  failed_when: false
+  changed_when: false
+
+
+- name: Install Jenkins from deb
+  apt:
+    deb: /tmp/jenkins.deb
+  when: jenkins_installed.rc != 0
+
+
+- name: Start and enable Jenkins
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
