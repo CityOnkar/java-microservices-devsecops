@@ -1,5 +1,5 @@
 {{- define "microservice.name" -}}
-{{ .Values.name }}
+{{ .Chart.Name }}
 {{- end }}
 
 {{- define "microservice.fullname" -}}
