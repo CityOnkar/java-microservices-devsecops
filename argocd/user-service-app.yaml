@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user-service
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/CityOnkar/java-microservices-devsecops.git
+    targetRevision: develop
+    path: helm/microservice
+    helm:
+      valueFiles:
+        - values/user-service.yaml   # 🔥 THIS IS THE FIX
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: user-service
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

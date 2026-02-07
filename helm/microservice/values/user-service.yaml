@@ -11,8 +11,8 @@ service:
 
 env:
   SPRING_PROFILES_ACTIVE: prod
-  DB_HOST: user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
-  DB_PORT: "3306"
+  SPRING_DATASOURCE_URL: jdbc:mysql://user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com:3306/userdb
+
 
 secrets:
   enabled: true
