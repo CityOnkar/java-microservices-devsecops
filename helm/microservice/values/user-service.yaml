@@ -2,7 +2,7 @@ name: user-service
 
 image:
   repository: cityonkar/user-service
-  tag: "13"
+  tag: "build-18"
 
 env:
   DB_HOST: user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
