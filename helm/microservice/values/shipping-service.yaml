@@ -1,0 +1,5 @@
+name: shipping-service
+
+image:
+  repository: cityonkar/shipping-service
+  tag: "2"

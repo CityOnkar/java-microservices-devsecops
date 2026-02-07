@@ -1,0 +1,5 @@
+name: analytics-service
+
+image:
+  repository: cityonkar/analytics-service
+  tag: "1"

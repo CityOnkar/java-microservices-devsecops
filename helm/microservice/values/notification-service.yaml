@@ -1,0 +1,5 @@
+name: notification-service
+
+image:
+  repository: cityonkar/notification-service
+  tag: "1"

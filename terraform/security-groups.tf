@@ -73,3 +73,22 @@ resource "aws_security_group" "sonarqube_sg" {
     Name = "sonarqube-sg"
   }
 }
+
+resource "aws_security_group" "rds_mysql" {
+  name   = "rds-mysql-sg"
+  vpc_id = module.vpc.vpc_id
+
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [module.eks.node_security_group_id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

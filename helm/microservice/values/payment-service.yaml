@@ -1,0 +1,5 @@
+name: payment-service
+
+image:
+  repository: cityonkar/payment-service
+  tag: "3"

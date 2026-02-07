@@ -1,0 +1,5 @@
+name: config-service
+
+image:
+  repository: cityonkar/config-service
+  tag: "1"

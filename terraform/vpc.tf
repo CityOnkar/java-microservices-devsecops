@@ -16,3 +16,12 @@ module "vpc" {
     Project = "devsecops"
   }
 }
+
+resource "aws_db_subnet_group" "rds_private" {
+  name       = "rds-private-subnet-group"
+  subnet_ids = module.vpc.private_subnets
+
+  tags = {
+    Name = "rds-private"
+  }
+}

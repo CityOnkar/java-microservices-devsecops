@@ -1,0 +1,5 @@
+name: inventory-service
+
+image:
+  repository: cityonkar/inventory-service
+  tag: "1"

@@ -1,0 +1,5 @@
+name: gateway-service
+
+image:
+  repository: cityonkar/gateway-service
+  tag: "1"

@@ -1,0 +1,13 @@
+name: user-service
+
+image:
+  repository: cityonkar/user-service
+  tag: "13"
+
+env:
+  DB_HOST: user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
+  DB_PORT: "3306"
+
+secrets:
+  enabled: true
+  name: user-db-secret
