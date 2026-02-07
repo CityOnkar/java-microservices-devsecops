@@ -1,13 +1,27 @@
-name: user-service
+replicaCount: 1
 
 image:
   repository: cityonkar/user-service
-  tag: "build-18"
+  tag: "build-18"   # or git-sha / build number
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
 
 env:
+  SPRING_PROFILES_ACTIVE: prod
   DB_HOST: user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
   DB_PORT: "3306"
 
 secrets:
   enabled: true
   name: user-db-secret
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
