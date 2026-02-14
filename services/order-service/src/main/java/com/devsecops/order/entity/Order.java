@@ -3,6 +3,7 @@ package com.devsecops.order.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
   @Id

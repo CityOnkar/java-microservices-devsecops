@@ -12,3 +12,90 @@ services:
     build: services/user-service
     ports:
       - "8081:8081"
+    depends_on:
+      - mysql-user
+    environment:
+      - DB_HOST=mysql-user
+      - DB_PORT=3306
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - PORT=8081
+      - SPRING_DATASOURCE_HIKARI_INITIALIZATIONFAILTIMEOUT=-1
+
+  mysql-order:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: orderdb
+      MYSQL_USER: order
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+
+  order-service:
+    build: services/order-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql-order
+    environment:
+      - DB_HOST=mysql-order
+      - DB_PORT=3306
+      - DB_USER=order
+      - DB_PASSWORD=password
+      - PORT=8082
+      - SPRING_DATASOURCE_HIKARI_INITIALIZATIONFAILTIMEOUT=-1
+
+  inventory-service:
+    build: services/inventory-service
+    ports:
+      - "8083:8083"
+    environment:
+      - PORT=8083
+
+  auth-service:
+    build: services/auth-service
+    ports:
+      - "8084:8084"
+    environment:
+      - PORT=8084
+
+  notification-service:
+    build: services/notification-service
+    ports:
+      - "8085:8085"
+    environment:
+      - PORT=8085
+
+  shipping-service:
+    build: services/shipping-service
+    ports:
+      - "8086:8086"
+    environment:
+      - PORT=8086
+
+  payment-service:
+    build: services/payment-service
+    ports:
+      - "8087:8087"
+    environment:
+      - PORT=8087
+
+  analytics-service:
+    build: services/analytics-service
+    ports:
+      - "8090:8090"
+    environment:
+      - PORT=8090
+
+  gateway-service:
+    build: services/gateway-service
+    ports:
+      - "8088:8088"
+    environment:
+      - PORT=8088
+
+  config-service:
+    build: services/config-service
+    ports:
+      - "8089:8089"
+    environment:
+      - PORT=8089

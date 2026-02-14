@@ -29,7 +29,13 @@ pipeline {
             "user-service",
             "order-service",
             "payment-service",
-            "inventory-service"
+            "inventory-service",
+            "auth-service",
+            "notification-service",
+            "shipping-service",
+            "analytics-service",
+            "gateway-service",
+            "config-service"
           ]
 
           for (service in services) {

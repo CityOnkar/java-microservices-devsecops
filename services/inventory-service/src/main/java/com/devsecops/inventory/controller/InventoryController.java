@@ -3,7 +3,7 @@ package com.devsecops.inventory.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/inventorys")
+@RequestMapping("/inventory")
 public class InventoryController {
 
   @GetMapping

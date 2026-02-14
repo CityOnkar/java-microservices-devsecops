@@ -55,14 +55,30 @@
           </configuration>
         </plugin>
   
-        <!-- Spring Boot -->
+        <!-- Spring Boot (managed only, actual plugin below) -->
         <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
         </plugin>
   
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <!-- child modules inherit this plugin for repackaging -->
+      <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 
 </project>
