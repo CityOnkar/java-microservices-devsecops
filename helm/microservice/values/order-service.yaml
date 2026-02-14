@@ -1,0 +1,40 @@
+name: order-service
+
+image:
+  repository: cityonkar/order-service
+  tag: "7"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+replicaCount: 1
+
+env:
+  DB_HOST: order-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
+  DB_PORT: "3306"
+  DB_USER: admin
+  SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+  SPRING_JPA_SHOW_SQL: "false"
+
+secrets:
+  enabled: true
+  name: order-db-secret
+
+resources:
+  requests:
+    cpu: "200m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1024Mi"
+
+probes:
+  startup:
+    initialDelaySeconds: 45
+    failureThreshold: 30
+  readiness:
+    initialDelaySeconds: 20
+  liveness:
+    initialDelaySeconds: 60

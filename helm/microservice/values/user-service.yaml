@@ -1,0 +1,40 @@
+name: user-service
+
+replicaCount: 1
+
+image:
+  repository: cityonkar/user-service
+  tag: "build-18"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  SPRING_PROFILES_ACTIVE: prod
+  SPRING_DATASOURCE_URL: jdbc:mysql://user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com:3306/userdb
+  DB_USER: admin
+  SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+  SPRING_JPA_SHOW_SQL: "false"
+
+secrets:
+  enabled: true
+  name: user-db-secret
+
+resources:
+  requests:
+    cpu: "200m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1024Mi"
+
+probes:
+  startup:
+    initialDelaySeconds: 45
+    failureThreshold: 30
+  readiness:
+    initialDelaySeconds: 20
+  liveness:
+    initialDelaySeconds: 60

@@ -1,0 +1,59 @@
+replicaCount: 1
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env: {}
+
+configMap:
+  enabled: false
+  data: {}
+
+secrets:
+  enabled: false
+  name: ""
+
+# Health check probes configuration
+probes:
+  startup:
+    path: /actuator/health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+  readiness:
+    path: /actuator/health/readiness
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  liveness:
+    path: /actuator/health/liveness
+    initialDelaySeconds: 45
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsReadOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL

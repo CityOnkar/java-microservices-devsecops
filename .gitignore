@@ -1,0 +1,17 @@
+# Terraform
+terraform/.terraform/
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+
+terraform-backend/.terraform/
+terraform-backend/terraform.tfstate
+terraform-backend/terraform.tfstate.*
+
+# Keep lock files
+!terraform/.terraform.lock.hcl
+!terraform-backend/.terraform.lock.hcl
+
+# IDE
+.vscode/
+

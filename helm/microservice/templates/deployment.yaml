@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "microservice.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "microservice.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "microservice.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "microservice.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"       
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+
+          {{- if .Values.env }}
+          env:
+          {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+          {{- end }}
+          {{- end }}
+
+          {{- if .Values.secrets.enabled }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secrets.name }}
+          {{- end }}
+
+          {{- if .Values.configMap.enabled }}
+            {{- if not .Values.secrets.enabled }}
+          envFrom:
+            {{- end }}
+            - configMapRef:
+                name: {{ include "microservice.fullname" . }}-config
+          {{- end }}
+
+          # Startup Probe - ensures container has time to start
+          startupProbe:
+            httpGet:
+              path: {{ .Values.probes.startup.path | default "/actuator/health" }}
+              port: http
+            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds | default 30 }}
+            periodSeconds: {{ .Values.probes.startup.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.probes.startup.timeoutSeconds | default 5 }}
+            failureThreshold: {{ .Values.probes.startup.failureThreshold | default 30 }}
+
+          # Readiness Probe - checks if service is ready to receive traffic
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readiness.path | default "/actuator/health/readiness" }}
+              port: http
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default 15 }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds | default 5 }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default 3 }}
+            successThreshold: {{ .Values.probes.readiness.successThreshold | default 1 }}
+
+          # Liveness Probe - restarts container if unhealthy
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.liveness.path | default "/actuator/health/liveness" }}
+              port: http
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default 45 }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default 15 }}
+            timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds | default 5 }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default 3 }}
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+          {{- if .Values.securityContext }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
