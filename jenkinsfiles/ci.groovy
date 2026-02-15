@@ -76,7 +76,7 @@ pipeline {
                     --exit-code 1 \
                     --severity CRITICAL \
                     --ignore-unfixed \
-                    --ignore-policy ${WORKSPACE}/.trivyignore.yaml \
+                    --ignorefile ${WORKSPACE}/.trivyignore \
                     ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
                 """
               }
