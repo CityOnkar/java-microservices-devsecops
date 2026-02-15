@@ -1,20 +1,20 @@
 name: user-service
 
-replicaCount: 1
-
 image:
   repository: cityonkar/user-service
-  tag: "build-18"
+  tag: "git-6225dfb"
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 8080
 
+replicaCount: 1
+
 env:
-  SPRING_PROFILES_ACTIVE: prod
-  SPRING_DATASOURCE_URL: jdbc:mysql://user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com:3306/userdb
-  DB_USER: admin
+  DB_HOST: user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
+  DB_PORT: "3306"
+  DB_USER: userdbuser
   SPRING_JPA_HIBERNATE_DDL_AUTO: validate
   SPRING_JPA_SHOW_SQL: "false"
 

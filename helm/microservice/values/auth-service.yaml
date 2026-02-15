@@ -2,7 +2,7 @@ name: auth-service
 
 image:
   repository: cityonkar/auth-service
-  tag: "1"
+  tag: "git-6225dfb"
   pullPolicy: IfNotPresent
 
 service:

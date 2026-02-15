@@ -2,7 +2,7 @@ name: notification-service
 
 image:
   repository: cityonkar/notification-service
-  tag: "1"
+  tag: "git-6225dfb"
   pullPolicy: IfNotPresent
 
 service:

@@ -1,0 +1,28 @@
+{
+    "SecretList": [
+        {
+            "ARN": "arn:aws:secretsmanager:us-east-1:570367131375:secret:user-service-db-secret-510kuU",
+            "Name": "user-service-db-secret",
+            "LastChangedDate": "2026-02-15T12:24:34.407000+05:30",
+            "LastAccessedDate": "2026-02-15T05:30:00+05:30",
+            "SecretVersionsToStages": {
+                "terraform-20260215065433741500000003": [
+                    "AWSCURRENT"
+                ]
+            },
+            "CreatedDate": "2026-02-15T12:24:32.769000+05:30"
+        },
+        {
+            "ARN": "arn:aws:secretsmanager:us-east-1:570367131375:secret:order-service-db-secret-1XHtdS",
+            "Name": "order-service-db-secret",
+            "LastChangedDate": "2026-02-15T12:24:34.517000+05:30",
+            "LastAccessedDate": "2026-02-15T05:30:00+05:30",
+            "SecretVersionsToStages": {
+                "terraform-20260215065433820900000004": [
+                    "AWSCURRENT"
+                ]
+            },
+            "CreatedDate": "2026-02-15T12:24:32.774000+05:30"
+        }
+    ]
+}
