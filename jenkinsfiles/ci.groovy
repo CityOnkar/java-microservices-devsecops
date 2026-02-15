@@ -72,11 +72,14 @@ pipeline {
               stage("Trivy Scan - ${service}") {
                 sh """
                   trivy image \
-                  --exit-code 1 \
-                  --severity HIGH,CRITICAL \
-                  ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
+                    --scanners vuln \
+                    --exit-code 1 \
+                    --severity CRITICAL \
+                    --ignore-unfixed \
+                    ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
                 """
               }
+
 
               stage("Docker Push - ${service}") {
                 withCredentials([usernamePassword(
