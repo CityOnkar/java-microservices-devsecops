@@ -79,11 +79,21 @@ pipeline {
               }
 
               stage("Docker Push - ${service}") {
-                sh """
-                  docker push ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
-                  docker push ${DOCKER_REGISTRY}/${service}:build-${BUILD_NUMBER_TAG}
-                """
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                
+                  sh """
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    docker push ${DOCKER_REGISTRY}/${service}:git-${COMMIT}
+                    docker push ${DOCKER_REGISTRY}/${service}:build-${BUILD_NUMBER_TAG}
+                    docker logout
+                  """
+                }
               }
+              
             }
           }
         }
