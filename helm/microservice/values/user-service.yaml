@@ -15,11 +15,10 @@ env:
   DB_HOST: user-service-db.cepumyous0um.us-east-1.rds.amazonaws.com
   DB_PORT: "3306"
   DB_USER: userdbuser
-  SPRING_JPA_HIBERNATE_DDL_AUTO: validate
-  SPRING_JPA_SHOW_SQL: "false"
+
 
 secrets:
-  enabled: true
+  enabled: false
   name: user-db-secret
 
 resources:
