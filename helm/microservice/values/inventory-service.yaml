@@ -2,7 +2,7 @@ name: inventory-service
 
 image:
   repository: cityonkar/inventory-service
-  tag: "1"
+  tag: "git-6225dfb"
   pullPolicy: IfNotPresent
 
 service:
