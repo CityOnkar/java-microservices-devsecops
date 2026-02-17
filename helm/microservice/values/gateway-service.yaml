@@ -9,6 +9,10 @@ service:
   type: ClusterIP
   port: 8080
 
+ingress:
+  enabled: true
+
+
 replicaCount: 1
 
 resources:
