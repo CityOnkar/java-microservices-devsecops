@@ -18,8 +18,10 @@ env:
 
 
 secrets:
-  enabled: false
+  enabled: true
   name: order-db-secret
+  data:
+    DB_PASSWORD: "+&M=<InP[rsh<j>Z"
 
 resources:
   requests:
