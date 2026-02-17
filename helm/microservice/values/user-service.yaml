@@ -18,7 +18,7 @@ env:
 
 
 secrets:
-  enabled: false
+  enabled: true
   name: user-db-secret
 
 resources:
