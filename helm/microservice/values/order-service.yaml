@@ -27,6 +27,9 @@ ingress:
   enabled: true
   path: /orders
 
+serviceMonitor:
+  enabled: true
+
 
 resources:
   requests:

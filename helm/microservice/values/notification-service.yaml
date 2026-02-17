@@ -13,6 +13,9 @@ ingress:
   enabled: true
   path: /notifications
 
+serviceMonitor:
+  enabled: true
+
 replicaCount: 1
 
 resources:
