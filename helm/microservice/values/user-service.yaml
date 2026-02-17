@@ -23,6 +23,11 @@ secrets:
   data:
     DB_PASSWORD: "<7CB!_ka(WaKymU<"
 
+ingress:
+  enabled: true
+  path: /users
+
+
 resources:
   requests:
     cpu: "200m"

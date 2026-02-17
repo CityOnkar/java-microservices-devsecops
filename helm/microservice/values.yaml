@@ -19,6 +19,11 @@ secrets:
   enabled: false
   name: ""
 
+ingress:
+  enabled: false
+  path: /
+
+
 # Health check probes configuration
 probes:
   startup:

@@ -23,6 +23,11 @@ secrets:
   data:
     DB_PASSWORD: "+&M=<InP[rsh<j>Z"
 
+ingress:
+  enabled: true
+  path: /orders
+
+
 resources:
   requests:
     cpu: "200m"
