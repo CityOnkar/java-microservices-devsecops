@@ -13,6 +13,9 @@ ingress:
   enabled: true
   path: /payments
 
+serviceMonitor:
+  enabled: true
+
 replicaCount: 1
 
 resources:

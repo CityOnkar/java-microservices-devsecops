@@ -13,6 +13,9 @@ ingress:
   enabled: true
   path: /auths
 
+serviceMonitor:
+  enabled: true
+
 replicaCount: 1
 
 resources:

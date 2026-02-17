@@ -13,6 +13,9 @@ ingress:
   enabled: true
   path: /inventory
 
+serviceMonitor:
+  enabled: true
+
 replicaCount: 1
 
 resources:

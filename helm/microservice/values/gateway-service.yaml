@@ -13,6 +13,9 @@ ingress:
   enabled: true
   path: /gateways
 
+serviceMonitor:
+  enabled: true
+
 
 replicaCount: 1
 

@@ -13,6 +13,9 @@ ingress:
   enabled: true
   path: /configs
 
+serviceMonitor:
+  enabled: true
+
 replicaCount: 1
 
 resources:

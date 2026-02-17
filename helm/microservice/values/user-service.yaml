@@ -27,6 +27,9 @@ ingress:
   enabled: true
   path: /users
 
+serviceMonitor:
+  enabled: true
+
 
 resources:
   requests:

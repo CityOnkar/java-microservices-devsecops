@@ -23,6 +23,12 @@ ingress:
   enabled: false
   path: /
 
+serviceMonitor:
+  enabled: false
+  path: /actuator/prometheus
+  interval: 30s
+
+
 
 # Health check probes configuration
 probes:
