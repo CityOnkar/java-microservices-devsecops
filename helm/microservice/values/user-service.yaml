@@ -18,8 +18,10 @@ env:
 
 
 secrets:
-  enabled: false
+  enabled: true
   name: user-db-secret
+  data:
+    DB_PASSWORD: "<7CB!_ka(WaKymU<"
 
 resources:
   requests:
